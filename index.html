@@ -7,7 +7,7 @@
     <title>Divya Rao | Full Stack Developer & Data Analyst</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Outfit:wght@300;400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;600;700&family=Outfit:wght@300;400;500;700&display=swap"
         rel="stylesheet">
 
     <script>
@@ -18,32 +18,37 @@
                     colors: {
                         brand: {
                             DEFAULT: '#FFD700', // Gold
-                            dark: '#B49500',
-                            glow: '#FFE564'
+                            dark: '#D4AF37',
+                            glow: '#FDE047'
                         },
                         accent: {
-                            DEFAULT: '#6366f1', // Indigo (Techy contrast)
+                            DEFAULT: '#FF003C', // Cyber Red/Pink
                             cyan: '#06b6d4'
                         },
                         surface: {
-                            DEFAULT: '#0b1121', // Deep Navy
-                            lighter: '#1e293b',
-                            darker: '#02040a'
+                            DEFAULT: '#1a0303', // Deep Maroon
+                            lighter: '#360505',
+                            darker: '#000000'
                         }
                     },
                     fontFamily: {
                         sans: ['Outfit', 'sans-serif'],
-                        display: ['Space Grotesk', 'sans-serif'],
+                        display: ['Rajdhani', 'sans-serif'],
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
                         'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                         'spin-slow': 'spin 12s linear infinite',
+                        'grid-scroll': 'gridScroll 20s linear infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0)' },
                             '50%': { transform: 'translateY(-20px)' },
+                        },
+                        gridScroll: {
+                            '0%': { backgroundPosition: '0 0' },
+                            '100%': { backgroundPosition: '40px 40px' }
                         }
                     }
                 }
@@ -53,12 +58,27 @@
 
     <style>
         body {
-            background-color: #02040a;
-            color: #e2e8f0;
+            background-color: #0f0000;
+            color: #ffedd5;
             font-family: 'Outfit', sans-serif;
+            position: relative;
+        }
+
+        /* Robotic Grid Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image:
-                radial-gradient(circle at 15% 50%, rgba(255, 215, 0, 0.03) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(99, 102, 241, 0.03) 0%, transparent 25%);
+                linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 215, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: -1;
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
         }
 
         h1,
@@ -67,7 +87,9 @@
         h4,
         h5,
         h6 {
-            font-family: 'Space Grotesk', sans-serif;
+            font-family: 'Rajdhani', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
         .reveal {
@@ -82,15 +104,18 @@
         }
 
         .glass-card {
-            background: rgba(11, 17, 33, 0.6);
+            background: rgba(54, 5, 5, 0.4);
+            /* Maroon tint */
             backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 60, 0.1);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 95% 100%, 0 100%);
+            /* Robotic cut corner */
         }
 
         .glass-card:hover {
-            border-color: rgba(255, 215, 0, 0.3);
-            box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.5);
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
         }
 
         .cert-card {
@@ -104,19 +129,18 @@
         }
 
         .filter-btn.active {
-            background: linear-gradient(135deg, #FFD700 0%, #B49500 100%);
-            color: #02040a;
+            background: linear-gradient(135deg, #FFD700 0%, #D4AF37 100%);
+            color: #1a0303;
             border-color: transparent;
             font-weight: 700;
+            clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 15%);
         }
 
         .gradient-text {
-            background: linear-gradient(to right, #FFD700, #FFE564, #FFD700);
+            background: linear-gradient(to right, #FFD700, #FF003C);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            background-size: 200% auto;
-            animation: gradientMove 5s linear infinite;
         }
 
         @keyframes gradientMove {
@@ -127,6 +151,24 @@
             100% {
                 background-position: 200% 50%;
             }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a0303;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #FF003C;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #FFD700;
         }
 
         /* Custom scrollbar */
@@ -276,52 +318,95 @@
     <!-- About Me Section -->
     <section id="about" class="max-w-7xl mx-auto px-6 py-20">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div class="reveal">
-                <h2 class="text-4xl font-bold mb-6 text-white italic">About <span class="text-brand">Me</span></h2>
-                <div class="space-y-6 text-slate-400 leading-relaxed">
-                    <p>
-                        I am a passionate <span class="text-white font-semibold">Full Stack Developer</span> and <span
-                            class="text-white font-semibold">Data Analyst</span> driven by a deep curiosity for emerging
-                        technologies.
-                    </p>
-                    <p>
-                        My journey spans across building robust web applications to diving deep into data analytics and
-                        exploring the decentralized world of <span class="text-brand">Blockchain</span>.
-                        With a strong foundation in <span class="text-brand">Python</span>, <span
-                            class="text-brand">AI</span>, and <span class="text-brand">IoT</span>, I aim to build
-                        systems that are not just functional but intelligent and scalable.
-                    </p>
-                    <p>
-                        When I'm not coding, I'm likely analyzing data trends or researching the next big thing in tech
-                        innovation.
-                    </p>
+            <div class="reveal relative group">
+                <div
+                    class="absolute -inset-1 bg-gradient-to-r from-brand to-accent rounded-[2.5rem] blur opacity-25 group-hover:opacity-50 transition duration-1000">
+                </div>
+                <div
+                    class="relative rounded-[2.5rem] overflow-hidden border border-white/10 shadow-2xl bg-surface-lighter">
+                    <!-- 3D Avatar Image -->
+                    <img src="dev_avatar_3d_1769714808316.png"
+                        class="w-full h-auto object-cover hover:scale-105 transition duration-700">
                 </div>
             </div>
 
             <div class="reveal delay-200">
-                <div class="bg-surface/40 border border-white/5 p-8 rounded-[2.5rem] relative overflow-hidden">
-                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand/10 blur-[50px]"></div>
-                    <h3 class="text-xl font-bold text-white mb-6">Tech Arsenal</h3>
+                <h2 class="text-5xl font-bold mb-8 text-white leading-tight">
+                    Architecting the <br>
+                    <span class="gradient-text">Digital Frontier.</span>
+                </h2>
+                <div class="space-y-6 text-slate-400 text-lg leading-relaxed font-light">
+                    <p>
+                        I am a <strong class="text-white">Full Stack Alchemist</strong> and <strong
+                            class="text-white">Data Strategist</strong>. My passion lies in decrypting complex problems
+                        and reassembling them into elegant, scalable solutions.
+                    </p>
+                    <p>
+                        From the immutable ledgers of <span class="text-brand">Blockchain</span> to the predictive power
+                        of <span class="text-brand">AI</span>, I don't just write code—I engineer ecosystems. My work is
+                        a fusion of precise logic and creative design.
+                    </p>
+                </div>
+
+                <div class="mt-10">
+                    <h3 class="text-sm font-bold text-white uppercase tracking-widest mb-6">Technical Arsenal</h3>
                     <div class="flex flex-wrap gap-3">
                         <span
-                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">Python</span>
+                            class="glass-card px-4 py-2 rounded-lg text-sm text-brand font-mono border border-brand/20">Python
+                            3.12</span>
+                        <span class="glass-card px-4 py-2 rounded-lg text-sm text-slate-300 font-mono">React 18</span>
+                        <span class="glass-card px-4 py-2 rounded-lg text-sm text-slate-300 font-mono">Django</span>
+                        <span class="glass-card px-4 py-2 rounded-lg text-sm text-slate-300 font-mono">Solidity</span>
+                        <span class="glass-card px-4 py-2 rounded-lg text-sm text-slate-300 font-mono">TensorFlow</span>
                         <span
-                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">JavaScript</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">React/Next.js</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">Django</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">SQL/NoSQL</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">TensorFlow</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">Solidity</span>
-                        <span
-                            class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">Git</span>
+                            class="glass-card px-4 py-2 rounded-lg text-sm text-brand font-mono border border-brand/20">IoT/ESP32</span>
                     </div>
                 </div>
             </div>
+            <div class="space-y-6 text-slate-400 leading-relaxed">
+                <p>
+                    I am a passionate <span class="text-white font-semibold">Full Stack Developer</span> and <span
+                        class="text-white font-semibold">Data Analyst</span> driven by a deep curiosity for emerging
+                    technologies.
+                </p>
+                <p>
+                    My journey spans across building robust web applications to diving deep into data analytics and
+                    exploring the decentralized world of <span class="text-brand">Blockchain</span>.
+                    With a strong foundation in <span class="text-brand">Python</span>, <span
+                        class="text-brand">AI</span>, and <span class="text-brand">IoT</span>, I aim to build
+                    systems that are not just functional but intelligent and scalable.
+                </p>
+                <p>
+                    When I'm not coding, I'm likely analyzing data trends or researching the next big thing in tech
+                    innovation.
+                </p>
+            </div>
+        </div>
+
+        <div class="reveal delay-200">
+            <div class="bg-surface/40 border border-white/5 p-8 rounded-[2.5rem] relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 w-40 h-40 bg-brand/10 blur-[50px]"></div>
+                <h3 class="text-xl font-bold text-white mb-6">Tech Arsenal</h3>
+                <div class="flex flex-wrap gap-3">
+                    <span
+                        class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">Python</span>
+                    <span
+                        class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">JavaScript</span>
+                    <span
+                        class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">React/Next.js</span>
+                    <span
+                        class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">Django</span>
+                    <span
+                        class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">SQL/NoSQL</span>
+                    <span
+                        class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">TensorFlow</span>
+                    <span
+                        class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">Solidity</span>
+                    <span
+                        class="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-slate-300">Git</span>
+                </div>
+            </div>
+        </div>
         </div>
     </section>
 
@@ -500,26 +585,46 @@
             <p class="text-slate-400 mb-12 max-w-lg mx-auto">Currently open to internship opportunities and
                 collaborative projects in Blockchain, AI, or IoT.</p>
 
-            <div class="flex flex-col md:flex-row justify-center items-center gap-6">
+            <div class="flex flex-col items-center gap-8">
+                <!-- Socials Row -->
+                <div class="flex gap-4">
+                    <a href="https://github.com/Divss72" target="_blank"
+                        class="p-4 bg-surface-lighter border border-white/10 rounded-2xl text-slate-400 hover:text-white hover:border-brand/50 hover:bg-surface-lighter/80 transition-all group">
+                        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.linkedin.com/in/divya-rao-975a3b32a/" target="_blank"
+                        class="p-4 bg-surface-lighter border border-white/10 rounded-2xl text-slate-400 hover:text-[#0077b5] hover:border-[#0077b5]/50 hover:bg-surface-lighter/80 transition-all group">
+                        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/divsss62" target="_blank"
+                        class="p-4 bg-surface-lighter border border-white/10 rounded-2xl text-slate-400 hover:text-[#e1306c] hover:border-[#e1306c]/50 hover:bg-surface-lighter/80 transition-all group">
+                        <svg class="w-6 h-6 group-hover:scale-110 transition-transform" fill="currentColor"
+                            viewBox="0 0 24 24">
+                            <path
+                                d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                        </svg>
+                    </a>
+                </div>
+
                 <!-- Email Button -->
                 <a href="mailto:divyarao2403@gmail.com"
-                    class="group relative px-8 py-4 bg-white text-black font-bold rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95">
-                    <span class="relative z-10 flex items-center gap-2">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    class="group relative px-10 py-5 bg-brand text-surface-darker font-bold rounded-2xl overflow-hidden transition-all hover:scale-105 active:scale-95 shadow-[0_0_40px_rgba(255,215,0,0.3)]">
+                    <span class="relative z-10 flex items-center gap-3 text-lg">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                         divyarao2403@gmail.com
                     </span>
                 </a>
-
-                <!-- Mobile Socials (Only shows on phone) -->
-                <div class="flex lg:hidden gap-6">
-                    <a href="https://github.com/Divss72"
-                        class="p-4 bg-surface border border-white/5 rounded-2xl text-slate-400 hover:text-white transition">GitHub</a>
-                    <a href="https://www.linkedin.com/in/divya-rao-975a3b32a/"
-                        class="p-4 bg-surface border border-white/5 rounded-2xl text-slate-400 hover:text-[#0077b5] transition">LinkedIn</a>
-                </div>
             </div>
         </div>
     </section>
