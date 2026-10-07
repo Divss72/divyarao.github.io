@@ -11,6 +11,7 @@ import {
   TelemetryStatus,
   CurrentlyStatus,
 } from '../types';
+import { API_BASE } from '../services/api';
 
 export const INITIAL_TELEMETRY: TelemetryStatus = {
   status: 'Available for SWE Roles, fullstack projects, mern stack projects',
@@ -732,7 +733,7 @@ class PortfolioStore {
   public async syncWithServer() {
     if (typeof window === 'undefined') return;
     try {
-      const res = await fetch('/api/public/data');
+      const res = await fetch(`${API_BASE}/public/data`);
       if (!res.ok) return;
       const data = await res.json();
       if (data.projects && data.projects.length) this.projects = data.projects;
