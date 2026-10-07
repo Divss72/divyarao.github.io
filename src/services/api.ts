@@ -5,6 +5,8 @@
 
 export const API_BASE = import.meta.env.VITE_API_URL
   ? (import.meta.env.VITE_API_URL as string).replace(/\/$/, '') + '/api'
+  : typeof window !== 'undefined' && (window.location.hostname.includes('divyarao.in') || window.location.hostname.includes('github.io'))
+  ? 'https://api.divyarao.in/api'
   : '/api';
 
 async function request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {

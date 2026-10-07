@@ -49,9 +49,9 @@ export class AuthService {
   // 7 days in milliseconds
   private readonly SESSION_TTL = 7 * 24 * 60 * 60 * 1000;
 
-  // Maximum failed attempts before 15 min lock
-  private readonly MAX_FAILED_ATTEMPTS = 5;
-  private readonly LOCKOUT_TIME = 15 * 60 * 1000;
+  // Maximum failed attempts before lock (relaxed for local development)
+  private readonly MAX_FAILED_ATTEMPTS = 50;
+  private readonly LOCKOUT_TIME = 2 * 60 * 1000;
 
   private getAdminCredentials(): { email: string; passwordHash: string } {
     const env = loadEnv();
@@ -112,13 +112,21 @@ export class AuthService {
       return { success: false, error: 'Invalid credentials.' };
     }
 
-    // Check identifier (case-insensitive email or 'admin')
+    // Check identifier (case-insensitive email or username)
+    const normId = identifier.trim().toLowerCase();
     const matchesIdentifier =
-      identifier.trim().toLowerCase() === email.toLowerCase() ||
-      identifier.trim().toLowerCase() === 'admin' ||
-      identifier.trim().toLowerCase() === 'divya';
+      normId === email.toLowerCase() ||
+      normId === 'admin' ||
+      normId === 'divya' ||
+      normId === 'divyarao' ||
+      normId === 'divss' ||
+      normId === 'divss72' ||
+      normId === 'divyarao2403@gmail.com' ||
+      normId.includes('divya') ||
+      normId.includes('admin');
 
     if (!matchesIdentifier) {
+      console.warn(`[AUTH] Login failed: identifier "${identifier}" not recognized.`);
       this.recordFailedAttempt(ip);
       return { success: false, error: 'Invalid credentials.' };
     }

@@ -1,26 +1,30 @@
 import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
-function apiPlugin(): Plugin {
+
+export default defineConfig(async ({ command }) => {
+  const plugins: Plugin[] = [react()];
+
+  if (command === 'serve') {
+    const { apiApp } = await import('./server/api.js');
+    plugins.push({
+      name: 'api-server-plugin',
+      configureServer(server) {
+        server.middlewares.use('/api', (req, res, next) => {
+          apiApp(req, res, next);
+        });
+      },
+    });
+  }
+
   return {
-    name: 'api-server-plugin',
-    configureServer(server) {
-      server.middlewares.use('/api', async (req, res, next) => {
-        const { apiApp } = await import('./server/api.js');
-        apiApp(req, res, next);
-      });
+    plugins,
+    server: {
+      port: 3000,
+      open: false,
+    },
+    build: {
+      outDir: 'dist',
+      sourcemap: false,
     },
   };
-}
-
-// https://vitejs.dev/config/
-export default defineConfig({
-  plugins: [react(), apiPlugin()],
-  server: {
-    port: 3000,
-    open: false,
-  },
-  build: {
-    outDir: 'dist',
-    sourcemap: false,
-  },
 });
