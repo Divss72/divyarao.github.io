@@ -21,14 +21,14 @@ app.use('/api', apiApp);
 
 import fs from 'fs';
 
-// Serve static frontend files in production if dist exists
+// Serve static frontend files in production if dist exists, or fallback API response
 if (fs.existsSync(DIST_DIR)) {
   app.use(express.static(DIST_DIR));
-  app.get('*', (_req, res) => {
+  app.use((_req, res) => {
     res.sendFile(path.join(DIST_DIR, 'index.html'));
   });
 } else {
-  app.get('/', (_req, res) => {
+  app.use((_req, res) => {
     res.json({ status: 'ok', service: 'Divya Rao Portfolio API', health: '/health', api: '/api' });
   });
 }
