@@ -110,8 +110,9 @@ export const ProjectDetailPage: React.FC = () => {
       </section>
 
       {/* Metrics & Benchmarks Grid */}
+      {(project.metrics ?? []).length > 0 && (
       <section className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-        {project.metrics.map((m) => (
+        {(project.metrics ?? []).map((m) => (
           <div key={m.label} className="p-4 rounded-xl bg-cream-50 border border-beige-dark/50 shadow-warm-sm">
             <span className="text-[10px] text-coffee-muted block uppercase tracking-wider">
               {m.label}
@@ -122,6 +123,7 @@ export const ProjectDetailPage: React.FC = () => {
           </div>
         ))}
       </section>
+      )}
 
       {/* Problem & Solution Dual Columns */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 font-sans">
@@ -151,6 +153,7 @@ export const ProjectDetailPage: React.FC = () => {
       </section>
 
       {/* Architecture Flow Diagram */}
+      {project.architectureFlow?.steps && (
       <section className="space-y-4">
         <div className="flex items-center justify-between">
           <span className="text-[10px] text-accent-terracotta uppercase tracking-wider font-bold block font-mono">
@@ -181,8 +184,10 @@ export const ProjectDetailPage: React.FC = () => {
           ))}
         </div>
       </section>
+      )}
 
       {/* Key Features & Hardening */}
+      {(project.keyFeatures ?? []).length > 0 && (
       <section className="paper-card p-6 sm:p-8 space-y-4 font-sans">
         <span className="font-mono text-[10px] text-accent-terracotta uppercase tracking-wider font-bold block">
           Key Technical Highlights
@@ -191,7 +196,7 @@ export const ProjectDetailPage: React.FC = () => {
           Production Capabilities
         </h3>
         <ul className="space-y-2.5 text-sm text-coffee-dark">
-          {project.keyFeatures.map((feat, i) => (
+          {(project.keyFeatures ?? []).map((feat, i) => (
             <li key={i} className="flex items-start gap-2.5">
               <span className="text-accent-terracotta font-bold">✦</span>
               <span>{feat}</span>
@@ -199,15 +204,18 @@ export const ProjectDetailPage: React.FC = () => {
           ))}
         </ul>
       </section>
+      )}
 
       {/* Challenges & Key Learnings */}
+      {((project.challenges ?? []).length > 0 || (project.learnings ?? []).length > 0) && (
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8 font-sans">
+        {(project.challenges ?? []).length > 0 && (
         <div className="p-6 rounded-xl bg-cream-50 border border-beige-dark/50 space-y-3">
           <span className="font-mono text-[10px] text-accent-terracotta uppercase tracking-wider font-bold block">
             Challenges Overcome
           </span>
           <ul className="space-y-2 text-xs text-coffee-dark">
-            {project.challenges.map((c, i) => (
+            {(project.challenges ?? []).map((c, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="text-coffee font-bold">•</span>
                 <span>{c}</span>
@@ -215,13 +223,15 @@ export const ProjectDetailPage: React.FC = () => {
             ))}
           </ul>
         </div>
+        )}
 
+        {(project.learnings ?? []).length > 0 && (
         <div className="p-6 rounded-xl bg-cream-50 border border-beige-dark/50 space-y-3">
           <span className="font-mono text-[10px] text-accent-sage uppercase tracking-wider font-bold block">
             Engineering Retrospective & Takeaways
           </span>
           <ul className="space-y-2 text-xs text-coffee-dark">
-            {project.learnings.map((l, i) => (
+            {(project.learnings ?? []).map((l, i) => (
               <li key={i} className="flex items-start gap-2">
                 <span className="text-coffee font-bold">•</span>
                 <span>{l}</span>
@@ -229,15 +239,18 @@ export const ProjectDetailPage: React.FC = () => {
             ))}
           </ul>
         </div>
+        )}
       </section>
+      )}
 
       {/* Complete Tech Stack */}
+      {(project.techStack ?? []).length > 0 && (
       <section className="space-y-3 pt-6 border-t border-beige-dark/50">
         <span className="text-[10px] text-coffee-muted uppercase tracking-wider font-bold block font-mono">
           Technologies & Tools Leveraged
         </span>
         <div className="flex flex-wrap gap-2">
-          {project.techStack.map((tech) => (
+          {(project.techStack ?? []).map((tech) => (
             <span
               key={tech}
               className="px-3 py-1.5 rounded-lg bg-cream-50 border border-beige-dark/50 text-coffee-espresso text-xs font-semibold shadow-warm-sm"
@@ -247,6 +260,7 @@ export const ProjectDetailPage: React.FC = () => {
           ))}
         </div>
       </section>
+      )}
 
       {/* Back to Archive CTA */}
       <div className="pt-8 border-t border-beige-dark/50 flex justify-between items-center">

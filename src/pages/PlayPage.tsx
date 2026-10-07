@@ -1,11 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
 import { RunnerGame } from '../components/interactive/RunnerGame';
 import { BasketballCourt } from '../components/interactive/BasketballCourt';
 import { DoodleCanvas } from '../components/interactive/DoodleCanvas';
-import { Link } from 'react-router-dom';
 
 export const PlayPage: React.FC = () => {
-  const [activeGame, setActiveGame] = useState<'runner' | 'basketball' | 'doodle'>('runner');
+  const [searchParams, setSearchParams] = useSearchParams();
+  const gameQuery = searchParams.get('game');
+
+  const [activeGame, setActiveGame] = useState<'runner' | 'basketball' | 'doodle'>(() => {
+    if (gameQuery === 'basketball') return 'basketball';
+    if (gameQuery === 'doodle') return 'doodle';
+    return 'runner';
+  });
+
+  useEffect(() => {
+    if (gameQuery === 'basketball') setActiveGame('basketball');
+    else if (gameQuery === 'doodle') setActiveGame('doodle');
+    else if (gameQuery === 'runner') setActiveGame('runner');
+  }, [gameQuery]);
+
+  const selectGame = (mode: 'runner' | 'basketball' | 'doodle') => {
+    setActiveGame(mode);
+    setSearchParams({ game: mode });
+  };
 
   return (
     <div className="space-y-12 py-10 px-4 sm:px-6 max-w-5xl mx-auto font-mono text-xs">
@@ -18,23 +36,13 @@ export const PlayPage: React.FC = () => {
           The Play Arcade
         </h1>
         <p className="text-coffee-muted font-sans text-sm sm:text-base leading-relaxed">
-          Where code meets play. Test your reflexes in the journey runner, practice slingshot jump shots, or draw in the notebook sketchpad.
+          Where code meets play. Practice slingshot jump shots, sketch in the notebook canvas, or test your reflexes in the journey runner.
         </p>
 
         {/* Game Mode Selector */}
         <div className="flex flex-wrap items-center justify-center gap-2 pt-4">
           <button
-            onClick={() => setActiveGame('runner')}
-            className={`px-5 py-2.5 rounded-xl border transition cursor-pointer font-bold ${
-              activeGame === 'runner'
-                ? 'bg-coffee text-cream-50 border-coffee shadow-warm-sm'
-                : 'bg-cream-50 border-beige-dark/50 text-coffee-muted hover:text-coffee-espresso hover:bg-beige/30'
-            }`}
-          >
-            🏃 Play My Journey (Runner)
-          </button>
-          <button
-            onClick={() => setActiveGame('basketball')}
+            onClick={() => selectGame('basketball')}
             className={`px-5 py-2.5 rounded-xl border transition cursor-pointer font-bold ${
               activeGame === 'basketball'
                 ? 'bg-coffee text-cream-50 border-coffee shadow-warm-sm'
@@ -44,7 +52,7 @@ export const PlayPage: React.FC = () => {
             🏀 Basketball Shootout
           </button>
           <button
-            onClick={() => setActiveGame('doodle')}
+            onClick={() => selectGame('doodle')}
             className={`px-5 py-2.5 rounded-xl border transition cursor-pointer font-bold ${
               activeGame === 'doodle'
                 ? 'bg-coffee text-cream-50 border-coffee shadow-warm-sm'
@@ -52,6 +60,16 @@ export const PlayPage: React.FC = () => {
             }`}
           >
             ✏️ Sketchbook Doodle
+          </button>
+          <button
+            onClick={() => selectGame('runner')}
+            className={`px-5 py-2.5 rounded-xl border transition cursor-pointer font-bold ${
+              activeGame === 'runner'
+                ? 'bg-coffee text-cream-50 border-coffee shadow-warm-sm'
+                : 'bg-cream-50 border-beige-dark/50 text-coffee-muted hover:text-coffee-espresso hover:bg-beige/30'
+            }`}
+          >
+            🏃 Play Journey (Runner)
           </button>
         </div>
       </div>

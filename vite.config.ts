@@ -1,12 +1,11 @@
 import { defineConfig, Plugin } from 'vite';
 import react from '@vitejs/plugin-react';
-import { apiApp } from './server/api.js';
-
 function apiPlugin(): Plugin {
   return {
     name: 'api-server-plugin',
     configureServer(server) {
-      server.middlewares.use('/api', (req, res, next) => {
+      server.middlewares.use('/api', async (req, res, next) => {
+        const { apiApp } = await import('./server/api.js');
         apiApp(req, res, next);
       });
     },

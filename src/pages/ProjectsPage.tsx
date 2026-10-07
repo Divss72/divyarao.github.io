@@ -107,18 +107,20 @@ export const ProjectsPage: React.FC = () => {
                 </p>
 
                 {/* Metrics Grid */}
+                {(project.metrics ?? []).length > 0 && (
                 <div className="grid grid-cols-2 gap-2 text-xs">
-                  {project.metrics.slice(0, 2).map((m) => (
+                  {(project.metrics ?? []).slice(0, 2).map((m) => (
                     <div key={m.label} className="p-2.5 rounded-lg bg-cream-100 border border-beige/60">
                       <span className="text-coffee-muted text-[10px] block">{m.label}</span>
                       <strong className="text-coffee-espresso text-sm font-bold">{m.value}</strong>
                     </div>
                   ))}
                 </div>
+                )}
 
                 {/* Tech Stack Pills */}
                 <div className="flex flex-wrap gap-1.5 pt-1">
-                  {project.techStack.slice(0, 5).map((tech) => (
+                  {(project.techStack ?? []).slice(0, 5).map((tech) => (
                     <span
                       key={tech}
                       className="px-2 py-0.5 rounded bg-cream-200 border border-beige-dark/40 text-coffee text-[10px]"
@@ -126,9 +128,9 @@ export const ProjectsPage: React.FC = () => {
                       {tech}
                     </span>
                   ))}
-                  {project.techStack.length > 5 && (
+                  {(project.techStack ?? []).length > 5 && (
                     <span className="text-[10px] text-coffee-muted self-center">
-                      +{project.techStack.length - 5} more
+                      +{(project.techStack ?? []).length - 5} more
                     </span>
                   )}
                 </div>

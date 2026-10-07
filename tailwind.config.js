@@ -69,6 +69,26 @@ module.exports = {
         'paper-grain': 'radial-gradient(circle at 1px 1px, rgba(107, 74, 50, 0.07) 1px, transparent 0)',
         'notebook-grid': 'linear-gradient(to right, rgba(107, 74, 50, 0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(107, 74, 50, 0.05) 1px, transparent 1px)',
       },
+      animation: {
+        'spin-slow': 'spin 6s linear infinite',
+        'walk': 'walk 0.35s ease-in-out infinite alternate',
+        'breathe': 'breathe 3s ease-in-out infinite',
+        'fadeIn': 'fadeIn 0.35s ease-out forwards',
+      },
+      keyframes: {
+        walk: {
+          '0%': { transform: 'translateY(0) rotate(-1.5deg)' },
+          '100%': { transform: 'translateY(-6px) rotate(1.5deg)' },
+        },
+        breathe: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-3px)' },
+        },
+        fadeIn: {
+          '0%': { opacity: '0', transform: 'translateY(6px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+      },
     },
   },
   plugins: [],

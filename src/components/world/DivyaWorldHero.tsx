@@ -75,7 +75,7 @@ const LANDMARKS: Landmark[] = [
     title: 'Wooden Stream Bridge',
     tag: 'Running & Trails',
     category: 'Hobby',
-    path: '/hobbies',
+    path: '/play?game=runner',
     xPercent: 32,
     yPercent: 67,
     icon: <Footprints className="w-3.5 h-3.5" />,
@@ -87,7 +87,7 @@ const LANDMARKS: Landmark[] = [
     title: 'Courtyard Hoops',
     tag: 'Basketball',
     category: 'Hobby',
-    path: '/hobbies',
+    path: '/play?game=basketball',
     xPercent: 22,
     yPercent: 82,
     icon: <Dribbble className="w-3.5 h-3.5" />,
@@ -99,7 +99,7 @@ const LANDMARKS: Landmark[] = [
     title: 'Garden Easel',
     tag: 'Doodles & Sketches',
     category: 'Art',
-    path: '/hobbies',
+    path: '/play?game=doodle',
     xPercent: 12,
     yPercent: 76,
     icon: <Palette className="w-3.5 h-3.5" />,
@@ -532,26 +532,28 @@ export const DivyaWorldHero: React.FC = () => {
         </div>
 
         {/* ============================================================
-            BOTTOM-LEFT: REAL AUTHENTIC PHOTO PORTRAIT FRAME
+            BOTTOM-LEFT: ANIMATED DP PORTRAIT (CLOSE-UP FACE)
             ============================================================ */}
         <div className="absolute bottom-6 left-6 z-30 hidden sm:flex items-center gap-3">
           <div
             onDoubleClick={() => setPhotoArtistic((prev) => !prev)}
             onClick={() => setPersonalNoteOpen(true)}
-            className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full p-1 bg-gradient-to-tr from-amber-400 via-beige to-coffee-espresso shadow-warm-lg cursor-pointer group transition-transform hover:scale-105 active:scale-95"
-            title="Double-click to toggle artistic edition, click to read personal note"
+            className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-full cursor-pointer group transition-transform hover:scale-105 active:scale-95"
+            title="Double-click to toggle real photo • Click to read personal note"
           >
-            <div className="w-full h-full rounded-full overflow-hidden border-2 border-cream-50 bg-beige">
-              <img
-                src="/divya-flowers.jpg"
-                alt="Divya Rao"
-                className={`w-full h-full object-cover transition-all duration-500 ${
-                  photoArtistic ? 'filter sepia contrast-125 saturate-150' : 'filter brightness-105'
-                }`}
-              />
+            {/* Animated glow ring */}
+            <div className="absolute -inset-1 rounded-full bg-gradient-to-tr from-amber-400 via-orange-300 to-amber-500 opacity-80 blur-[2px] animate-spin-slow" />
+            <div className="relative w-full h-full rounded-full p-[3px] bg-gradient-to-tr from-amber-400 via-beige to-coffee-espresso shadow-warm-lg">
+              <div className="w-full h-full rounded-full overflow-hidden border-2 border-cream-50 bg-beige">
+                <img
+                  src={photoArtistic ? '/divya-flowers.jpg' : '/divya-animated-dp.jpg'}
+                  alt="Divya Rao"
+                  className="w-full h-full object-cover object-top transition-all duration-700 group-hover:scale-110"
+                />
+              </div>
             </div>
             {/* Online badge */}
-            <div className="absolute bottom-0 right-0 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow-warm-sm" />
+            <div className="absolute bottom-0.5 right-0.5 w-4 h-4 rounded-full bg-emerald-500 border-2 border-white shadow-warm-sm z-10" />
           </div>
 
           <div className="text-left font-sans">
@@ -563,7 +565,7 @@ export const DivyaWorldHero: React.FC = () => {
               <Sparkles className="w-3 h-3 text-amber-300" />
             </button>
             <p className="text-[10px] text-amber-100 font-mono drop-shadow-[0_1px_2px_rgba(43,29,20,0.85)]">
-              Double-click photo for artistic view
+              Double-click for real photo ✨
             </p>
           </div>
         </div>
@@ -580,9 +582,9 @@ export const DivyaWorldHero: React.FC = () => {
               className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cream-50/15 hover:bg-cream-50/25 transition text-cream-50 font-semibold"
             >
               <img
-                src="/divya-flowers.jpg"
+                src="/divya-animated-dp.jpg"
                 alt="Divya"
-                className="w-5 h-5 rounded-full object-cover border border-white/40"
+                className="w-5 h-5 rounded-full object-cover object-top border border-white/40"
               />
               <span className="hidden sm:inline">Home</span>
             </Link>
@@ -654,9 +656,9 @@ export const DivyaWorldHero: React.FC = () => {
 
             <div className="flex items-center gap-3">
               <img
-                src="/divya-flowers.jpg"
+                src="/divya-animated-dp.jpg"
                 alt="Divya Rao"
-                className="w-14 h-14 rounded-full object-cover border-2 border-beige-dark"
+                className="w-14 h-14 rounded-full object-cover object-top border-2 border-beige-dark"
               />
               <div>
                 <h3 className="font-editorial text-xl font-bold text-coffee-espresso">
