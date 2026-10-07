@@ -13,6 +13,14 @@ async function request<T>(endpoint: string, options: RequestInit = {}): Promise<
     headers.set('Content-Type', 'application/json');
   }
 
+  // Include Bearer token if stored (enables cross-domain auth when API is deployed on Render)
+  if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('dr_admin_token');
+    if (token && !headers.has('Authorization')) {
+      headers.set('Authorization', `Bearer ${token}`);
+    }
+  }
+
   const response = await fetch(`${API_BASE}${endpoint}`, {
     ...options,
     headers,
@@ -39,12 +47,19 @@ export const api = {
   // Auth
   auth: {
     async login(identifier: string, password: string) {
-      return request<{ success: boolean; message: string; token?: string }>('/auth/login', {
+      const res = await request<{ success: boolean; message: string; token?: string }>('/auth/login', {
         method: 'POST',
         body: JSON.stringify({ identifier, password }),
       });
+      if (res.token && typeof window !== 'undefined') {
+        localStorage.setItem('dr_admin_token', res.token);
+      }
+      return res;
     },
     async logout() {
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('dr_admin_token');
+      }
       return request<{ success: boolean; message: string }>('/auth/logout', {
         method: 'POST',
       });

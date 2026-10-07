@@ -163,22 +163,26 @@
       "galleryImages": [
         {
           "url": "devposting-chronicles.png",
-          "caption": "DevPosting Community Chronicles Feed"
+          "caption": "DevPosting Community Chronicles Feed",
+          "_id": "6ac6b9856976a2fb70d90c70"
         },
         {
           "url": "devposting-topics.png",
-          "caption": "Topic Taxonomy & Categorized Feed"
+          "caption": "Topic Taxonomy & Categorized Feed",
+          "_id": "6ac6b9856976a2fb70d90c71"
         },
         {
           "url": "devposting-rants.png",
-          "caption": "Dev Rants Discussion Stream"
+          "caption": "Dev Rants Discussion Stream",
+          "_id": "6ac6b9856976a2fb70d90c72"
         }
       ],
       "featured": true,
       "status": "ONLINE",
       "published": true,
       "displayOrder": 1,
-      "date": "2024"
+      "date": "2024",
+      "updatedAt": "2026-10-07T21:28:37.329Z"
     },
     {
       "_id": "6ac6b6b09c488a549f734e3c",

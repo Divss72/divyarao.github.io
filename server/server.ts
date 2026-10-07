@@ -11,6 +11,11 @@ const DIST_DIR = path.join(ROOT_DIR, 'dist');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Health check endpoint for Render uptime and monitoring
+app.get('/health', (_req, res) => {
+  res.status(200).json({ status: 'ok', uptime: process.uptime(), timestamp: new Date().toISOString() });
+});
+
 // Mount API routes at /api
 app.use('/api', apiApp);
 

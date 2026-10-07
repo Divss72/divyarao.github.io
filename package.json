@@ -7,6 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
+    "server": "tsx server/server.ts",
+    "start": "tsx server/server.ts",
     "mongo:test": "node scripts/test-mongo.js"
   },
   "dependencies": {
@@ -20,7 +22,8 @@
     "mongoose": "^9.11.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.22.3"
+    "react-router-dom": "^6.22.3",
+    "tsx": "^4.23.15"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
