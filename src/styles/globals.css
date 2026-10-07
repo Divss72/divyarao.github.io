@@ -141,3 +141,40 @@ canvas {
     transform: translate(-18px, 20px) scale(0.96);
   }
 }
+
+/* Walking Animation for Divya's Doodle Character */
+@keyframes walkStride {
+  0% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  25% {
+    transform: translateY(-8px) rotate(-3deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  75% {
+    transform: translateY(-8px) rotate(3deg);
+  }
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+}
+
+.animate-walk {
+  animation: walkStride 0.45s infinite ease-in-out;
+}
+
+/* Gentle Idle Breathing Animation */
+@keyframes idleBreathe {
+  0%, 100% {
+    transform: translateY(0px) scale(1);
+  }
+  50% {
+    transform: translateY(-3px) scale(1.015);
+  }
+}
+
+.animate-breathe {
+  animation: idleBreathe 2.8s infinite ease-in-out;
+}
