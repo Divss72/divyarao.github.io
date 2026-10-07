@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Divya Rao — Engineering & AI Chronicles</title>
+    <link>https://divyarao.in/blog</link>
+    <description>Writings on Agentic AI, Autonomous Microservices, Compound Indexing, and Algorithmic Explorations by Divya Rao.</description>
+    <language>en-us</language>
+    <lastBuildDate>Wed, 08 Oct 2026 00:00:00 GMT</lastBuildDate>
+    <atom:link href="https://divyarao.in/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>Architecting Agentic Workflows: Beyond Prompt Engineering</title>
+      <link>https://divyarao.in/blog/architecting-agentic-workflows</link>
+      <guid>https://divyarao.in/blog/architecting-agentic-workflows</guid>
+      <pubDate>Mon, 06 Oct 2026 10:00:00 GMT</pubDate>
+      <description>How structured memory, tool validation loops, and multi-agent coordination elevate LLMs into reliable autonomous systems.</description>
+    </item>
+    <item>
+      <title>Autonomous Microservice Self-Healing: Engineering AutoHeal-J</title>
+      <link>https://divyarao.in/blog/autonomous-microservice-self-healing</link>
+      <guid>https://divyarao.in/blog/autonomous-microservice-self-healing</guid>
+      <pubDate>Sun, 28 Sep 2026 14:00:00 GMT</pubDate>
+      <description>Inside sub-3s Prometheus telemetry streaming, chaos injection survival, and automated container remediation.</description>
+    </item>
+    <item>
+      <title>Slashing Feed Latency by 40%: Compound Indexing in DevPosting</title>
+      <link>https://divyarao.in/blog/slashing-feed-latency-compound-indexing</link>
+      <guid>https://divyarao.in/blog/slashing-feed-latency-compound-indexing</guid>
+      <pubDate>Thu, 15 Sep 2026 09:30:00 GMT</pubDate>
+      <description>A deep-dive into MongoDB execution plans, cursor pagination, and multi-tier caching architectures.</description>
+    </item>
+  </channel>
+</rss>
