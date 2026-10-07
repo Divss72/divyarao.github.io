@@ -19,13 +19,19 @@ app.get('/health', (_req, res) => {
 // Mount API routes at /api
 app.use('/api', apiApp);
 
-// Serve static frontend files in production
-app.use(express.static(DIST_DIR));
+import fs from 'fs';
 
-// Fallback to index.html for client-side routing
-app.get('*', (_req, res) => {
-  res.sendFile(path.join(DIST_DIR, 'index.html'));
-});
+// Serve static frontend files in production if dist exists
+if (fs.existsSync(DIST_DIR)) {
+  app.use(express.static(DIST_DIR));
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(DIST_DIR, 'index.html'));
+  });
+} else {
+  app.get('/', (_req, res) => {
+    res.json({ status: 'ok', service: 'Divya Rao Portfolio API', health: '/health', api: '/api' });
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`[Private Studio Server] running at http://localhost:${PORT}`);
