@@ -26,6 +26,11 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenCv }) => {
 
   const closeMenu = () => setMobileMenuOpen(false);
 
+  // On the homepage, the interactive world scene features its own floating dock navigation and status bar
+  if (location.pathname === '/') {
+    return null;
+  }
+
   return (
     <header className="sticky top-0 z-40 bg-cream-100/90 backdrop-blur-md border-b border-beige-dark/40 transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">

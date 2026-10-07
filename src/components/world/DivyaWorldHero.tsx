@@ -176,6 +176,43 @@ export const DivyaWorldHero: React.FC = () => {
   // Parallax mouse offset
   const [mouseOffset, setMouseOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
 
+  // Doodle transparency cutout state
+  const [doodleImgSrc, setDoodleImgSrc] = useState<string>('/divya-doodle.jpg');
+
+  // Convert white background of doodle JPEG into transparent PNG in memory
+  useEffect(() => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = '/divya-doodle.jpg';
+    img.onload = () => {
+      try {
+        const canvas = document.createElement('canvas');
+        canvas.width = img.naturalWidth;
+        canvas.height = img.naturalHeight;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) return;
+        ctx.drawImage(img, 0, 0);
+        const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+        const data = imgData.data;
+        for (let i = 0; i < data.length; i += 4) {
+          const r = data[i];
+          const g = data[i + 1];
+          const b = data[i + 2];
+          if (r > 238 && g > 238 && b > 238) {
+            data[i + 3] = 0;
+          } else if (r > 220 && g > 220 && b > 220) {
+            const avg = (r + g + b) / 3;
+            data[i + 3] = Math.max(0, Math.floor((255 - avg) * 8));
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+        setDoodleImgSrc(canvas.toDataURL('image/png'));
+      } catch (err) {
+        console.warn('Canvas doodle cutout fallback:', err);
+      }
+    };
+  }, []);
+
   // Initialize character placement relative to viewport
   useEffect(() => {
     if (worldRef.current) {
@@ -487,9 +524,9 @@ export const DivyaWorldHero: React.FC = () => {
             }`}
           >
             <img
-              src="/divya-doodle.jpg"
+              src={doodleImgSrc}
               alt="Divya Rao Doodle Character"
-              className="w-full h-full object-contain filter drop-shadow-md mix-blend-multiply pointer-events-none"
+              className="w-full h-full object-contain filter drop-shadow-md pointer-events-none"
             />
           </div>
         </div>
