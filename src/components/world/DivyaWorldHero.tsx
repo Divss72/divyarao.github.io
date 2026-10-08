@@ -146,7 +146,7 @@ const LANDMARKS: Landmark[] = [
 
 const DIALOGUE_LINES = [
   "That's me! 👋",
-  "Click anywhere to guide me around!",
+  "Move your cursor around to guide me!",
   "The observatory is where I explore AI papers 🔭",
   "The villa has my full-stack projects 💻",
   "I love running across campus trails 👟",
@@ -283,12 +283,12 @@ export const DivyaWorldHero: React.FC = () => {
         const dy = targetPos.y - current.y;
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        if (distance > 6) {
+        if (distance > 5) {
           setIsWalking(true);
           setWalkFacing(dx > 0 ? 'right' : 'left');
 
-          // Smooth interpolation speed (easing)
-          const speed = Math.min(distance * 0.08, 6.5);
+          // Smooth interpolation speed (responsive easing)
+          const speed = Math.min(distance * 0.09, 8);
           const nx = current.x + (dx / distance) * speed;
           const ny = current.y + (dy / distance) * speed;
           return { x: nx, y: ny };
@@ -307,11 +307,11 @@ export const DivyaWorldHero: React.FC = () => {
     return () => cancelAnimationFrame(animationFrameId);
   }, [targetPos, isWalking]);
 
-  // Handle click anywhere on the world to command Divya to walk there
+  // Handle click anywhere on the world as a secondary direct command
   const handleWorldClick = (e: React.MouseEvent<HTMLDivElement>) => {
     // Ignore clicks if clicking directly on a button or link
     const target = e.target as HTMLElement;
-    if (target.closest('button') || target.closest('a')) return;
+    if (target.closest('button') || target.closest('a') || target.closest('nav')) return;
 
     if (!worldRef.current) return;
     const rect = worldRef.current.getBoundingClientRect();
@@ -326,13 +326,26 @@ export const DivyaWorldHero: React.FC = () => {
     setShowSpeechBubble(true);
   };
 
-  // Gentle mouse parallax
+  // Follow cursor wherever it moves across the world scene + gentle parallax
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!worldRef.current) return;
     const rect = worldRef.current.getBoundingClientRect();
     const nx = (e.clientX - rect.left) / rect.width - 0.5;
     const ny = (e.clientY - rect.top) / rect.height - 0.5;
     setMouseOffset({ x: nx * 14, y: ny * 10 });
+
+    // Ignore cursor target if hovering directly over navigation bar, header or interactive controls
+    const target = e.target as HTMLElement;
+    if (target.closest('nav') || target.closest('header') || target.closest('button')) return;
+
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    // Keep Divya inside walkable bounds
+    const boundedX = Math.max(70, Math.min(x, rect.width - 70));
+    const boundedY = Math.max(140, Math.min(y, rect.height - 90));
+
+    setTargetPos({ x: boundedX, y: boundedY });
   };
 
   const handleCharacterClick = (e: React.MouseEvent) => {
@@ -392,7 +405,7 @@ export const DivyaWorldHero: React.FC = () => {
             <p className="text-xs sm:text-sm text-amber-50/90 font-sans max-w-md drop-shadow-[0_1px_4px_rgba(43,29,20,0.8)] leading-relaxed">
               Full-stack architectures • AI & long-context systems • Curious explorations.
               <span className="hidden sm:inline text-amber-200/90 font-mono text-xs ml-1.5">
-                (Click anywhere in the scene to guide me!)
+                (Move your cursor around to guide me!)
               </span>
             </p>
           </div>
@@ -574,12 +587,12 @@ export const DivyaWorldHero: React.FC = () => {
             BOTTOM-CENTER: FLOATING PILL DOCK NAVIGATION
             (Matching the Reference Screenshot's Dock Nav)
             ============================================================ */}
-        <nav className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 w-[92%] max-w-xl">
-          <div className="flex items-center justify-between p-1.5 sm:p-2 rounded-full bg-coffee-espresso/90 backdrop-blur-md border border-cream-100/20 shadow-warm-xl text-cream-100 font-mono text-xs">
+        <nav className="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 w-[96%] max-w-2xl px-2">
+          <div className="flex items-center justify-between p-1.5 sm:p-2 rounded-full bg-coffee-espresso/95 backdrop-blur-md border border-cream-100/20 shadow-warm-xl text-cream-100 font-mono text-xs gap-1 sm:gap-2">
             {/* Dock Avatar Link */}
             <Link
               to="/"
-              className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-cream-50/15 hover:bg-cream-50/25 transition text-cream-50 font-semibold"
+              className="flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-full bg-cream-50/15 hover:bg-cream-50/25 transition text-cream-50 font-semibold shrink-0"
             >
               <img
                 src="/divya-animated-dp.jpg"
@@ -590,40 +603,40 @@ export const DivyaWorldHero: React.FC = () => {
             </Link>
 
             {/* Quick Links */}
-            <div className="flex items-center gap-1 sm:gap-2 overflow-x-auto no-scrollbar">
+            <div className="flex items-center gap-0.5 sm:gap-1.5 flex-1 justify-center min-w-0">
               <Link
                 to="/projects"
-                className="px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white"
+                className="px-2 sm:px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white shrink-0 text-[11px] sm:text-xs"
               >
                 Projects
               </Link>
               <Link
                 to="/research"
-                className="px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white"
+                className="px-2 sm:px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white shrink-0 text-[11px] sm:text-xs"
               >
                 Research
               </Link>
               <Link
                 to="/hobbies"
-                className="px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white"
+                className="px-2 sm:px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white shrink-0 text-[11px] sm:text-xs"
               >
                 Hobbies
               </Link>
               <Link
                 to="/blog"
-                className="px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white"
+                className="px-2 sm:px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white shrink-0 text-[11px] sm:text-xs"
               >
                 Blog
               </Link>
               <Link
                 to="/play"
-                className="px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white"
+                className="px-2 sm:px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white shrink-0 text-[11px] sm:text-xs"
               >
                 Play
               </Link>
               <Link
                 to="/about"
-                className="px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white"
+                className="px-2 sm:px-2.5 py-1 rounded-full hover:bg-cream-50/15 transition text-cream-100/90 hover:text-white shrink-0 text-[11px] sm:text-xs"
               >
                 About
               </Link>
@@ -632,7 +645,7 @@ export const DivyaWorldHero: React.FC = () => {
             {/* Contact / Resume Pill Button (Like reference Resume ↗) */}
             <Link
               to="/contact"
-              className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-amber-400 hover:bg-amber-300 text-coffee-black font-semibold shadow-warm-sm transition-transform active:scale-95"
+              className="flex items-center gap-1 px-3 sm:px-3.5 py-1.5 rounded-full bg-amber-400 hover:bg-amber-300 text-coffee-black font-semibold shadow-warm-sm transition-transform active:scale-95 shrink-0 ml-1 sm:ml-2"
             >
               <span>Connect</span>
               <ArrowUpRight className="w-3.5 h-3.5" />
