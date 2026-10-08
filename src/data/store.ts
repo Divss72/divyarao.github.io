@@ -12,6 +12,7 @@ import {
   CurrentlyStatus,
 } from '../types';
 import { API_BASE } from '../services/api';
+import { normalizeImagePath } from '../utils/image';
 
 export const INITIAL_TELEMETRY: TelemetryStatus = {
   status: 'Available for SWE Roles, fullstack projects, mern stack projects',
@@ -90,12 +91,12 @@ export const INITIAL_PROJECTS: Project[] = [
       'Deployed on Railway and Cloudflare Pages with snappy sub-80ms API responses under simulated loads.',
     githubUrl: 'https://github.com/Divss72/devposting-backend',
     liveUrl: 'https://devposting.pages.dev',
-    image: 'project-devposting.png',
+    image: '/project-devposting.png',
     galleryImages: [
-      { url: 'devposting-chronicles.png', caption: 'DevPosting Chronicles — Main Community Feed' },
-      { url: 'devposting-topics.png', caption: 'Topics Explore Engine with Taxonomy Clusters' },
-      { url: 'devposting-rants.png', caption: 'Dev Rants — Community Micro-Discussion Stream' },
-      { url: 'devposting-societies.png', caption: 'Developer Societies & Group Channels' },
+      { url: '/devposting-chronicles.png', caption: 'DevPosting Chronicles — Main Community Feed' },
+      { url: '/devposting-topics.png', caption: 'Topics Explore Engine with Taxonomy Clusters' },
+      { url: '/devposting-rants.png', caption: 'Dev Rants — Community Micro-Discussion Stream' },
+      { url: '/devposting-societies.png', caption: 'Developer Societies & Group Channels' },
     ],
     featured: true,
     status: 'PRODUCTION',
@@ -147,10 +148,10 @@ export const INITIAL_PROJECTS: Project[] = [
     result:
       'Successfully sustained recovery across synthetic failure injections simulating 40% node degradation.',
     githubUrl: 'https://github.com/Divss72/Java_AutoHeal-J',
-    image: 'project-autoheal-real.png',
+    image: '/project-autoheal-real.png',
     galleryImages: [
-      { url: 'project-autoheal-real.png', caption: 'AutoHeal-J Live Fleet Telemetry Command Console' },
-      { url: 'project-autoheal.jpg', caption: 'Microservice Node Topology & Status Map' },
+      { url: '/project-autoheal-real.png', caption: 'AutoHeal-J Live Fleet Telemetry Command Console' },
+      { url: '/project-autoheal.jpg', caption: 'Microservice Node Topology & Status Map' },
     ],
     featured: true,
     status: 'ONLINE',
@@ -203,10 +204,10 @@ export const INITIAL_PROJECTS: Project[] = [
       'Deployed globally on Cloudflare Pages with zero server dependencies and near-instant load times.',
     githubUrl: 'https://github.com/Divss72/Algo--visualization',
     liveUrl: 'https://algolabs-frontend.pages.dev',
-    image: 'project-algolabs-real.png',
+    image: '/project-algolabs-real.png',
     galleryImages: [
-      { url: 'project-algolabs-real.png', caption: 'AlgoLabs Interactive Sorting Sandbox Interface' },
-      { url: 'project-algolabs.jpg', caption: 'Binary Search & Tree Traversal Visual Execution' },
+      { url: '/project-algolabs-real.png', caption: 'AlgoLabs Interactive Sorting Sandbox Interface' },
+      { url: '/project-algolabs.jpg', caption: 'Binary Search & Tree Traversal Visual Execution' },
     ],
     featured: true,
     status: 'ACTIVE',
@@ -708,11 +709,27 @@ export const INITIAL_COMMENTS: BlogComment[] = [
   },
 ];
 
+function normalizeProjectImages(p: Project): Project {
+  return {
+    ...p,
+    image: normalizeImagePath(p.image),
+    galleryImages: p.galleryImages?.map((g) => {
+      if (typeof g === 'string') {
+        return normalizeImagePath(g);
+      }
+      return {
+        ...g,
+        url: normalizeImagePath(g.url),
+      };
+    }) as any,
+  };
+}
+
 // Reactive Store Implementation with LocalStorage Persistence
 class PortfolioStore {
   private listeners: Set<() => void> = new Set();
 
-  private projects: Project[] = INITIAL_PROJECTS;
+  private projects: Project[] = INITIAL_PROJECTS.map(normalizeProjectImages);
   private blogs: BlogPost[] = INITIAL_BLOGS;
   private comments: BlogComment[] = INITIAL_COMMENTS;
   private research: ResearchItem[] = INITIAL_RESEARCH;
@@ -736,7 +753,9 @@ class PortfolioStore {
       const res = await fetch(`${API_BASE}/public/data`);
       if (!res.ok) return;
       const data = await res.json();
-      if (data.projects && data.projects.length) this.projects = data.projects;
+      if (data.projects && data.projects.length) {
+        this.projects = data.projects.map(normalizeProjectImages);
+      }
       if (data.blogs && data.blogs.length) this.blogs = data.blogs;
       if (data.approvedComments && data.approvedComments.length) this.comments = data.approvedComments;
       if (data.research && data.research.length) this.research = data.research;
@@ -753,7 +772,10 @@ class PortfolioStore {
     if (typeof window === 'undefined') return;
     try {
       const storedProjects = localStorage.getItem('dr_projects');
-      if (storedProjects) this.projects = JSON.parse(storedProjects);
+      if (storedProjects) {
+        const parsed = JSON.parse(storedProjects);
+        this.projects = Array.isArray(parsed) ? parsed.map(normalizeProjectImages) : this.projects;
+      }
 
       const storedBlogs = localStorage.getItem('dr_blogs');
       if (storedBlogs) this.blogs = JSON.parse(storedBlogs);
@@ -816,11 +838,12 @@ class PortfolioStore {
 
   // Getters
   public getProjects(): Project[] {
-    return this.projects;
+    return this.projects.map(normalizeProjectImages);
   }
 
   public getProjectBySlug(slug: string): Project | undefined {
-    return this.projects.find((p) => p.slug === slug || p.id === slug);
+    const p = this.projects.find((proj) => proj.slug === slug || proj.id === slug);
+    return p ? normalizeProjectImages(p) : undefined;
   }
 
   public getBlogs(includeDrafts = false): BlogPost[] {
@@ -868,11 +891,14 @@ class PortfolioStore {
   }
 
   public getActivePhoto(): string {
-    return this.activePhoto;
+    return normalizeImagePath(this.activePhoto);
   }
 
   public getCustomImages() {
-    return this.customImages;
+    return this.customImages.map((img) => ({
+      ...img,
+      url: normalizeImagePath(img.url),
+    }));
   }
 
   public isAdmin(): boolean {

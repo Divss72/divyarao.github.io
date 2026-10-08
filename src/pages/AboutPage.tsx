@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { usePortfolioStore } from '../data/usePortfolioStore';
 import { SOCIAL_LINKS, INITIAL_TELEMETRY } from '../data/store';
 import { BookItem, PaperItem, ResearchItem } from '../types';
+import { normalizeImagePath } from '../utils/image';
 
 export const AboutPage: React.FC = () => {
   const store = usePortfolioStore();
@@ -69,7 +70,7 @@ export const AboutPage: React.FC = () => {
           <div className="relative group p-3 bg-cream-50 border border-beige-dark/60 rounded-2xl shadow-warm-lg">
             <div className="aspect-[4/5] w-72 sm:w-80 rounded-xl overflow-hidden bg-coffee-roast relative">
               <img
-                src={activePhoto}
+                src={normalizeImagePath(activePhoto)}
                 alt="Divya Rao"
                 className="w-full h-full object-cover object-top transition duration-500 group-hover:scale-102"
               />

@@ -33,7 +33,7 @@ export const SelectedProjects: React.FC = () => {
               <div className="rounded-xl overflow-hidden border border-beige-dark/70 shadow-warm-sm bg-coffee-roast">
                 <div className="aspect-video w-full bg-coffee-black relative">
                   <img
-                    src="devposting-chronicles.png"
+                    src="/devposting-chronicles.png"
                     alt="DevPosting Community Feed Screenshot"
                     className="w-full h-full object-cover object-top"
                   />
@@ -132,7 +132,7 @@ export const SelectedProjects: React.FC = () => {
               <div className="rounded-xl overflow-hidden border border-beige-dark/70 shadow-warm-sm bg-coffee-roast">
                 <div className="aspect-video w-full bg-coffee-black relative">
                   <img
-                    src="project-algolabs-real.png"
+                    src="/project-algolabs-real.png"
                     alt="AlgoLabs Visualizer Interface"
                     className="w-full h-full object-cover object-top"
                   />

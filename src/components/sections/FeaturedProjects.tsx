@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 export const FeaturedProjects: React.FC = () => {
-  const [devpostingImg, setDevpostingImg] = useState<string>('devposting-chronicles.png');
+  const [devpostingImg, setDevpostingImg] = useState<string>('/devposting-chronicles.png');
 
   return (
     <section id="projects" className="py-24 px-6 max-w-7xl mx-auto border-b border-slate-200">
@@ -36,9 +36,9 @@ export const FeaturedProjects: React.FC = () => {
               <div className="flex flex-wrap items-center gap-2 pt-1">
                 <span className="text-xs font-semibold text-slate-500 mr-2">Views:</span>
                 <button
-                  onClick={() => setDevpostingImg('devposting-chronicles.png')}
+                  onClick={() => setDevpostingImg('/devposting-chronicles.png')}
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition cursor-pointer ${
-                    devpostingImg === 'devposting-chronicles.png'
+                    devpostingImg === '/devposting-chronicles.png'
                       ? 'bg-blue-600 text-white shadow-sm'
                       : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
                   }`}
@@ -46,9 +46,9 @@ export const FeaturedProjects: React.FC = () => {
                   Chronicles (Home)
                 </button>
                 <button
-                  onClick={() => setDevpostingImg('devposting-topics.png')}
+                  onClick={() => setDevpostingImg('/devposting-topics.png')}
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition cursor-pointer ${
-                    devpostingImg === 'devposting-topics.png'
+                    devpostingImg === '/devposting-topics.png'
                       ? 'bg-blue-600 text-white shadow-sm'
                       : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
                   }`}
@@ -56,9 +56,9 @@ export const FeaturedProjects: React.FC = () => {
                   Explore Topics
                 </button>
                 <button
-                  onClick={() => setDevpostingImg('devposting-rants.png')}
+                  onClick={() => setDevpostingImg('/devposting-rants.png')}
                   className={`px-3 py-1.5 rounded-md text-xs font-medium transition cursor-pointer ${
-                    devpostingImg === 'devposting-rants.png'
+                    devpostingImg === '/devposting-rants.png'
                       ? 'bg-blue-600 text-white shadow-sm'
                       : 'bg-white border border-slate-200 text-slate-700 hover:bg-slate-50'
                   }`}
@@ -141,7 +141,7 @@ export const FeaturedProjects: React.FC = () => {
               <div className="rounded-xl overflow-hidden border border-slate-200 bg-white shadow-md">
                 <div className="aspect-video w-full bg-slate-100 overflow-hidden relative">
                   <img
-                    src="project-autoheal-real.png"
+                    src="/project-autoheal-real.png"
                     alt="AutoHeal-J Real Command Center"
                     className="w-full h-full object-cover object-top hover:scale-[1.02] transition duration-300"
                   />
@@ -213,7 +213,7 @@ export const FeaturedProjects: React.FC = () => {
               <div className="rounded-xl overflow-hidden border border-slate-200 bg-slate-900 shadow-md">
                 <div className="aspect-video w-full bg-slate-950 overflow-hidden relative">
                   <img
-                    src="project-algolabs-real.png"
+                    src="/project-algolabs-real.png"
                     alt="AlgoLabs Real Screenshot"
                     className="w-full h-full object-cover object-top hover:scale-[1.02] transition duration-300"
                   />

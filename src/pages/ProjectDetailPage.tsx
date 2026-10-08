@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { usePortfolioStore } from '../data/usePortfolioStore';
+import { normalizeImagePath } from '../utils/image';
 
 export const ProjectDetailPage: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -12,8 +13,12 @@ export const ProjectDetailPage: React.FC = () => {
   }
 
   const [activeGalleryImg, setActiveGalleryImg] = useState<string>(
-    project.galleryImages?.[0]?.url || project.image
+    normalizeImagePath(project.galleryImages?.[0]?.url || project.image)
   );
+
+  React.useEffect(() => {
+    setActiveGalleryImg(normalizeImagePath(project.galleryImages?.[0]?.url || project.image));
+  }, [project.id]);
 
   return (
     <article className="space-y-16 py-10 px-4 sm:px-6 max-w-5xl mx-auto font-mono text-xs">
@@ -81,9 +86,19 @@ export const ProjectDetailPage: React.FC = () => {
         <div className="rounded-2xl overflow-hidden border border-beige-dark/70 shadow-warm-md bg-coffee-roast">
           <div className="aspect-video w-full bg-coffee-black relative">
             <img
-              src={activeGalleryImg}
+              src={normalizeImagePath(activeGalleryImg)}
               alt={project.title}
               className="w-full h-full object-cover object-top transition duration-300"
+              onError={(e) => {
+                const target = e.currentTarget;
+                if (project.id === 'devposting' && !target.src.includes('devposting-chronicles')) {
+                  target.src = '/devposting-chronicles.png';
+                } else if (project.id === 'autoheal-j' && !target.src.includes('project-autoheal')) {
+                  target.src = '/project-autoheal-real.png';
+                } else if (project.id === 'algolabs' && !target.src.includes('project-algolabs')) {
+                  target.src = '/project-algolabs-real.png';
+                }
+              }}
             />
           </div>
         </div>
@@ -95,9 +110,9 @@ export const ProjectDetailPage: React.FC = () => {
             {project.galleryImages.map((g) => (
               <button
                 key={g.url}
-                onClick={() => setActiveGalleryImg(g.url)}
+                onClick={() => setActiveGalleryImg(normalizeImagePath(g.url))}
                 className={`px-3 py-1.5 rounded-lg transition cursor-pointer text-[11px] ${
-                  activeGalleryImg === g.url
+                  normalizeImagePath(activeGalleryImg) === normalizeImagePath(g.url)
                     ? 'bg-coffee text-cream-50 font-bold shadow-warm-sm'
                     : 'bg-cream-100 border border-beige-dark/40 text-coffee-muted hover:text-coffee-espresso'
                 }`}

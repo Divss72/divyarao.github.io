@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { usePortfolioStore } from '../data/usePortfolioStore';
+import { normalizeImagePath } from '../utils/image';
 
 export const ProjectsPage: React.FC = () => {
   const store = usePortfolioStore();
@@ -64,9 +65,19 @@ export const ProjectsPage: React.FC = () => {
                 <div className="rounded-xl overflow-hidden border border-beige-dark/70 shadow-warm-md bg-coffee-roast">
                   <div className="aspect-video w-full bg-coffee-black relative">
                     <img
-                      src={project.image}
+                      src={normalizeImagePath(project.image)}
                       alt={project.title}
                       className="w-full h-full object-cover object-top transition duration-500 hover:scale-102"
+                      onError={(e) => {
+                        const target = e.currentTarget;
+                        if (project.id === 'devposting' && !target.src.includes('devposting-chronicles')) {
+                          target.src = '/devposting-chronicles.png';
+                        } else if (project.id === 'autoheal-j' && !target.src.includes('project-autoheal')) {
+                          target.src = '/project-autoheal-real.png';
+                        } else if (project.id === 'algolabs' && !target.src.includes('project-algolabs')) {
+                          target.src = '/project-algolabs-real.png';
+                        }
+                      }}
                     />
                   </div>
                 </div>

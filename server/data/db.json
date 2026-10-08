@@ -159,20 +159,20 @@
       ],
       "githubUrl": "https://github.com/Divss72/devposting-backend",
       "liveUrl": "https://devposting.pages.dev",
-      "image": "devposting-chronicles.png",
+      "image": "/devposting-chronicles.png",
       "galleryImages": [
         {
-          "url": "devposting-chronicles.png",
+          "url": "/devposting-chronicles.png",
           "caption": "DevPosting Community Chronicles Feed",
           "_id": "6ac6b9856976a2fb70d90c70"
         },
         {
-          "url": "devposting-topics.png",
+          "url": "/devposting-topics.png",
           "caption": "Topic Taxonomy & Categorized Feed",
           "_id": "6ac6b9856976a2fb70d90c71"
         },
         {
-          "url": "devposting-rants.png",
+          "url": "/devposting-rants.png",
           "caption": "Dev Rants Discussion Stream",
           "_id": "6ac6b9856976a2fb70d90c72"
         }
@@ -206,14 +206,14 @@
       ],
       "githubUrl": "https://github.com/Divss72/Algo--visualization",
       "liveUrl": "https://algolabs-frontend.pages.dev",
-      "image": "project-algolabs-real.png",
+      "image": "/project-algolabs-real.png",
       "galleryImages": [
         {
-          "url": "project-algolabs-real.png",
+          "url": "/project-algolabs-real.png",
           "caption": "AlgoLabs Interactive Sorting Sandbox Interface"
         },
         {
-          "url": "project-algolabs.jpg",
+          "url": "/project-algolabs.jpg",
           "caption": "Binary Search & Tree Traversal Visual Execution"
         }
       ],
@@ -244,10 +244,10 @@
         "Docker"
       ],
       "githubUrl": "https://github.com/Divss72/Java_AutoHeal-J",
-      "image": "project-autoheal-real.png",
+      "image": "/project-autoheal-real.png",
       "galleryImages": [
         {
-          "url": "project-autoheal-real.png",
+          "url": "/project-autoheal-real.png",
           "caption": "AutoHeal-J Live Telemetry Console"
         }
       ],
