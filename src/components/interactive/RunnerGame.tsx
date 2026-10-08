@@ -35,8 +35,8 @@ export const RunnerGame: React.FC = () => {
     { dist: 150, text: '🎓 Started B.E. Computer Science at Chandigarh University' },
     { dist: 400, text: '💻 Built DevPosting Full-Stack Community Platform' },
     { dist: 750, text: '⚡ Built AutoHeal-J Spring Boot Monitoring Prototype' },
-    { dist: 1100, text: '🤖 Selected as Alta AI Builders Fellow (Agentic Workflows)' },
-    { dist: 1500, text: '🌍 GSSoC \'24 Open Source Contributor' },
+    { dist: 1100, text: '🤖 Selected as Alta AI Builders Fellow (Apr–May 2026)' },
+    { dist: 1500, text: '🌍 GSSoC Open Source Contributor (Present)' },
     { dist: 1900, text: '🏆 National Hackathon Finalist' },
   ];
 

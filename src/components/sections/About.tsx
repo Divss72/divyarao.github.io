@@ -77,22 +77,22 @@ export const About: React.FC = () => {
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                 <div className="p-4 bg-background-surface border border-border-subtle rounded-lg hover:border-accent/40 transition-colors">
-                  <div className="font-mono text-accent text-xs font-bold mb-1">GSSoC '24</div>
+                  <div className="font-mono text-accent text-xs font-bold mb-1">GSSoC (PRESENT)</div>
                   <h4 className="font-display text-sm font-bold text-text-primary mb-1">
                     Open Source Contributor
                   </h4>
                   <p className="text-xs text-text-secondary">
-                    GirlScript Summer of Code contributor across Open Source & AI Agents tracks.
+                    Active GirlScript Summer of Code contributor across open-source web ecosystems and tools.
                   </p>
                 </div>
 
                 <div className="p-4 bg-background-surface border border-border-subtle rounded-lg hover:border-accent/40 transition-colors">
-                  <div className="font-mono text-telemetry-blue text-xs font-bold mb-1">ALTA FELLOW</div>
+                  <div className="font-mono text-telemetry-blue text-xs font-bold mb-1">APR–MAY 2026</div>
                   <h4 className="font-display text-sm font-bold text-text-primary mb-1">
-                    AI Builders Fellow
+                    Alta AI Builders Fellow
                   </h4>
                   <p className="text-xs text-text-secondary">
-                    Selected fellow building state-of-the-art interactive agent workflows and LLM reasoning pipelines.
+                    Explored state-of-the-art interactive agent workflows, tool use, and LLM reasoning pipelines.
                   </p>
                 </div>
 

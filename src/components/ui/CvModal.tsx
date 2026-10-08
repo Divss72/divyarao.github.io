@@ -59,12 +59,12 @@ export const CvModal: React.FC<CvModalProps> = ({ isOpen, onClose }) => {
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
               <div className="p-3 bg-cream-100 rounded-lg border border-beige/50">
-                <span className="font-bold text-coffee-espresso block">Alta AI Builders Fellow</span>
-                <span className="text-coffee-muted">Exploring agentic workflows and long-context models.</span>
+                <span className="font-bold text-coffee-espresso block">GSSoC Contributor (2024–Present)</span>
+                <span className="text-coffee-muted">Open-source contributions across web platforms and developer tooling.</span>
               </div>
               <div className="p-3 bg-cream-100 rounded-lg border border-beige/50">
-                <span className="font-bold text-coffee-espresso block">GSSoC '24 Contributor</span>
-                <span className="text-coffee-muted">Open-source pull requests across developer tools and web platforms.</span>
+                <span className="font-bold text-coffee-espresso block">Alta AI Builders Fellow (Apr–May 2026)</span>
+                <span className="text-coffee-muted">Explored agentic workflows, LLM reasoning pipelines, and long-context systems.</span>
               </div>
               <div className="p-3 bg-cream-100 rounded-lg border border-beige/50">
                 <span className="font-bold text-coffee-espresso block">National Hackathon Finalist</span>

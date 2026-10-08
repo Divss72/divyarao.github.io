@@ -113,7 +113,7 @@ export const AboutPage: React.FC = () => {
             </div>
             <div className="p-3 rounded-xl bg-cream-50 border border-beige-dark/40 col-span-2 sm:col-span-1">
               <span className="text-coffee-muted text-[10px] block">AFFILIATION</span>
-              <strong className="text-coffee-espresso">Alta AI Fellow</strong>
+              <strong className="text-coffee-espresso">GSSoC & Alta Fellow</strong>
             </div>
           </div>
         </div>

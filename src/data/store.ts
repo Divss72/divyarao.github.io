@@ -401,10 +401,24 @@ export const INITIAL_PAPERS: PaperItem[] = [
 
 export const INITIAL_EXPERIENCE: ExperienceItem[] = [
   {
+    id: 'exp-02',
+    role: 'Open Source Contributor',
+    organization: 'GirlScript Summer of Code (GSSoC)',
+    period: '2024 — PRESENT',
+    location: 'Remote',
+    type: 'opensource',
+    badge: 'GSSoC (Present)',
+    highlights: [
+      'Active open-source contributor participating in GSSoC, authoring pull requests across web platforms and developer tooling.',
+      'Worked on modular React components, backend REST controllers, and documentation fixes.',
+      'Participated in code reviews, issue triage, and collaborative GitHub workflows.',
+    ],
+  },
+  {
     id: 'exp-01',
     role: 'AI Builders Fellow',
     organization: 'Alta AI Builders Fellowship',
-    period: '2024 — PRESENT',
+    period: 'APR 2026 — MAY 2026',
     location: 'Remote',
     type: 'fellowship',
     badge: 'AI Fellow',
@@ -412,20 +426,6 @@ export const INITIAL_EXPERIENCE: ExperienceItem[] = [
       'Selected fellow exploring interactive agent workflows, tool use, and multi-step reasoning pipelines.',
       'Experimenting with structured JSON outputs, prompt context selection, and agent feedback loops.',
       'Collaborating with other builders across AI product design and technical prototypes.',
-    ],
-  },
-  {
-    id: 'exp-02',
-    role: 'Open Source Contributor',
-    organization: 'GirlScript Summer of Code (GSSoC \'24)',
-    period: '2024',
-    location: 'Remote',
-    type: 'opensource',
-    badge: 'GSSoC \'24',
-    highlights: [
-      'Contributed pull requests across open-source web platforms and developer tools.',
-      'Worked on modular React components, backend REST controllers, and documentation fixes.',
-      'Participated in code reviews, issue triage, and collaborative GitHub workflows.',
     ],
   },
   {
