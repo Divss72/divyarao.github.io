@@ -83,7 +83,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenCv }) => {
             <div className="card-clean p-2 bg-white shadow-xl shadow-slate-200/60 overflow-hidden">
               <div className="aspect-[4/5] rounded-xl overflow-hidden bg-slate-100 relative">
                 <img
-                  src="/me1.jpeg"
+                  src="/divya-profile.png"
                   alt="Divya Rao"
                   className="w-full h-full object-cover object-top group-hover:scale-105 transition duration-500"
                 />

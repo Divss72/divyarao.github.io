@@ -34,7 +34,7 @@ export const About: React.FC = () => {
               <div className="relative p-2.5 border border-border-strong bg-background-surface/80 rounded-2xl overflow-hidden shadow-2xl">
                 <div className="relative aspect-[4/5] rounded-xl overflow-hidden bg-background-elevated">
                   <img
-                    src="/me1.jpeg"
+                    src="/divya-profile.png"
                     alt="Divya Rao - Systems Engineer"
                     className="w-full h-full object-cover object-top grayscale group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-105"
                   />

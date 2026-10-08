@@ -655,7 +655,7 @@ const DEFAULT_DB: DatabaseSchema = {
       author: 'Divya Rao',
       location: 'Chandigarh, India',
       statusBadge: 'Available for SWE Roles, fullstack projects, mern stack projects',
-      activePhoto: 'me1.jpeg',
+      activePhoto: 'divya-profile.png',
     },
     socialLinks: {
       github: 'https://github.com/Divss72',

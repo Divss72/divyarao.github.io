@@ -739,7 +739,7 @@ class PortfolioStore {
   private experience: ExperienceItem[] = INITIAL_EXPERIENCE;
   private skills: SkillCategory[] = INITIAL_SKILLS;
   private currently: CurrentlyStatus = INITIAL_CURRENTLY;
-  private activePhoto: string = 'me1.jpeg';
+  private activePhoto: string = '/divya-profile.png';
   private customImages: { id: string; url: string; title: string; category: string }[] = [];
 
   constructor() {
@@ -799,7 +799,11 @@ class PortfolioStore {
       if (storedCurrently) this.currently = JSON.parse(storedCurrently);
 
       const storedPhoto = localStorage.getItem('dr_active_photo');
-      if (storedPhoto) this.activePhoto = storedPhoto;
+      if (storedPhoto && storedPhoto !== 'me1.jpeg' && storedPhoto !== 'me.jpg') {
+        this.activePhoto = storedPhoto;
+      } else {
+        this.activePhoto = '/divya-profile.png';
+      }
 
       const storedCustomImgs = localStorage.getItem('dr_custom_images');
       if (storedCustomImgs) this.customImages = JSON.parse(storedCustomImgs);
@@ -1077,7 +1081,7 @@ class PortfolioStore {
     this.experience = INITIAL_EXPERIENCE;
     this.skills = INITIAL_SKILLS;
     this.currently = INITIAL_CURRENTLY;
-    this.activePhoto = 'me1.jpeg';
+    this.activePhoto = '/divya-profile.png';
     this.customImages = [];
     this.saveToStorage();
   }
